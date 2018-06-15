@@ -46,6 +46,31 @@
 - **grafana_pid_file_dir**: directory where PID file will be written to.
 - **grafana_pid_file**: path to PID file.
 - **grafana_user**: the [Grafana][grafana] user.
+- **grafana_enable_ldap**: set to `true` when using ldap
+
+## LDAP Variables
+- **grafana_ldap_host**: space seperated values for ldap server 
+- **grafana_ldap_port**: port for ldap config
+- **grafana_use_ssl**: set to `true` if ldap server supports TLS
+- **grafana_start_tls**: Set to true if connect ldap server with STARTTLS pattern (create connection in insecure, then upgrade to secure connection with TLS)
+- **grafana_skip_ssl_verify**: set to true if you want to skip ssl cert validation
+- **grafana_bind_dn**: ldap bind dn
+- **grafana_bind_password**:  ldap bind password `If the password contains # or ; you have to wrap it with triple quotes. Ex """#password;"""`
+- **grafana_search_filter**: User search filter, for example "(cn=%s)" or "(sAMAccountName=%s)" or "(uid=%s)"
+- **grafana_search_base_dn**: An array of base dns to search through
+- **grafana_ldap_name**: Specify names of the ldap attributes your ldap uses for name.
+- **grafana_ldap_surname**: Specify names of the ldap attributes your ldap uses for surname.
+- **grafana_ldap_username**: Specify names of the ldap attributes your ldap uses for username.
+- **grafana_ldap_memeber_of**: Specify names of the ldap attributes your ldap uses for member_of.
+- **grafana_ldap_email**: Specify names of the ldap attributes your ldap uses for email.
+- **grafana_group_mappings**: Map ldap groups to [Grafana][grafana] org roles.  list the org role followed by the dn 
+```
+grafana_group_mappings:
+  Admin:
+    - 'cn=users,dc=grafana,dc=org'
+  Viewer:
+    - '*'
+```
 
 Unless stated otherwise a default value is provided for each of the variables mentioned above in the `defaults` directory.
 
