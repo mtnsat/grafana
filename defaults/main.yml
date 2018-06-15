@@ -88,7 +88,7 @@ grafana_conf_data: |
 
   [dashboards.json]
 
-grafana_ldap_data |
+grafana_ldap_data: |
   verbose_logging = false
 
   [[servers]]
