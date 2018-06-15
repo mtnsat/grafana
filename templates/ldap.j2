@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+{{ grafana_ldap_data }}
+{% for g in grafana_group_mappings.keys() %}
+[[server.group_mappings]]
+{% for i in grafana_group_mappings[g] %}
+group_dn = "{{ i }}"
+{% endfor %}
+group_id = "{{ g }}"
+{% endfor %}

@@ -71,6 +71,18 @@
   notify: restart grafana
   tags: configuration
 
+- name: Ensure integrity of grafana configuration.
+  template:
+    src: 'ldap.j2'
+    dest: "{{ grafana_dir_conf }}/ldap.toml"
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    mode: 0644
+  become: yes
+  when: grafana_enable_ldap
+  notify: restart grafana
+  tags: configuration
+
 - name: ensure grafana pid directory is present
   file:
     path="{{ grafana_pid_file_dir }}"
