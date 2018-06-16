@@ -98,7 +98,7 @@ grafana_ldap_data: |
   start_tls = {{ grafana_start_tls | default('false') }}
   ssl_skip_verify = {{ grafana_skip_ssl_verify | default('false') }}
   bind_dn = "{{ grafana_bind_dn }}"
-  bind_password = {{ grafana_bind_password }}
+  bind_password = '{{ grafana_bind_password }}'
   search_filter = "{{ grafana_search_filter }}"
   search_base_dns = ["{{ grafana_search_base_dn }}"]
   
@@ -107,7 +107,7 @@ grafana_ldap_data: |
   surname = "{{ grafana_ldap_surname | default('sn') }}"
   username = "{{ grafana_ldap_username | default('cn') }}"
   member_of = "{{ grafana_ldap_member_of | default('memberOf') }}"
-  email =  ""{{ grafana_ldap_email | default('email') }}""
+  email =  "{{ grafana_ldap_email | default('email') }}"
 
 grafana_default:
   conf_dir: "{{ grafana_dir_conf }}"
