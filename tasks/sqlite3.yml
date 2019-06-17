@@ -1,0 +1,13 @@
+---
+- name: check if file already exist
+  stat:
+    path: "{{ grafana_dir_data }}/{{ grafana_database.path }}"
+  register: st
+
+- name: copy db flle
+  copy:
+    src: "{{ grafana_dir_data }}/{{ grafana_database.path }}"
+    dest: "{{ grafana_dir_data }}/{{ grafana_database.path }}.bkp"
+    remote_src: yes
+  when: st.stat.exists
+...
