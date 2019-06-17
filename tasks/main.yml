@@ -18,6 +18,10 @@
 - include: validation.yml
   tags: validation
 
+- name: Include DB backup type
+  include: "{{ grafana_database.type }}.yml"
+  tags: backup
+
 - name: ensure apt dependencies are installed
   apt:
     name="{{ item }}"
@@ -40,6 +44,11 @@
     update_cache=yes
     state=present
   become: yes
+  tags: [ apt ]
+
+- name: Install deb package
+  apt:
+    deb: https://dl.grafana.com/oss/release/grafana_{{version}}_amd64.deb
   tags: [ apt ]
 
 - name: ensure grafana is installed
@@ -82,6 +91,10 @@
   when: grafana_enable_ldap
   notify: restart grafana
   tags: configuration
+
+- name: Use backup database
+  include: "{{ grafana_database.type }}_use_backup.yml"
+  tags: backup
 
 - name: ensure grafana pid directory is present
   file:

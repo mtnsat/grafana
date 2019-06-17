@@ -1,0 +1,6 @@
+---
+- name: Use backup
+  command: mv "{{ grafana_dir_data }}/{{ grafana_database.path }}.bkp" "{{ grafana_dir_data }}/{{ grafana_database.path }}"
+  args:
+    removes: "{{ grafana_dir_data }}/{{ grafana_database.path }}.bkp"
+...
